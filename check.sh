@@ -65,6 +65,9 @@ fi
 }
 
 bye(){
-whiptail --title "Congratulation" --msgbox "You have generate new self-signed certificate, congratulation. Have a nice day! Wazo Team." 8 78}
+
+certificate_end_date_new=$(echo | openssl s_client -connect localhost:443 2> /dev/null | openssl x509 -noout -enddate | cut -d '=' -f2)
+
+whiptail --title "Congratulation" --msgbox "You have generate new self-signed certificate (New date: $certificate_end_date_new), congratulation. Have a nice day! Wazo Team." 8 78}
 }
 check_expire_date

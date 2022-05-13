@@ -13,10 +13,11 @@ generate_new
 generate_new(){
 
 if (whiptail --title "Generate new self-signed certificate" --yesno "Would you generate a new self-signed certificate ?" 8 78); then
-    #prevenir d'un redemarrage des services.
+    #agree to generate new certificate
     echo "User selected Yes, exit : $?."
     restart_services
 else
+    #if no, end script
     echo "User selected No, exit : $?."
     echo "Have a nice day, Wazo team."
 fi
@@ -26,8 +27,10 @@ fi
 restart_services(){
 if (whiptail --title "Generate new self-signed certificate" --yesno "All services will be restarted, please agree." 8 78); then
     echo "User selected Yes restart services, exit : $?."
+    #run Wazo service restart and regenerate self-signed certificate
     run_renew_certificate $?
 else
+    #if no, and script
     echo "User selected No restart services, exit : $?."
     echo "Have a nice day, Wazo team."
 fi

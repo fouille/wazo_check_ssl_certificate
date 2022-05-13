@@ -39,24 +39,24 @@ if [ $1 = 0 ]; then
             echo -e "XXX\n50\nAll Wazo Services stopping.\nXXX"
             wazo-service stop all
             echo -e "XXX\n100\nAll Wazo Services stopping... Done.\nXXX"
-            sleep 0.5
+            sleep 0.7
 
             echo -e "XXX\n50\nBackup and remove certificates... \nXXX"
             cp /usr/share/xivo-certs/server.{key,crt} /var/backups
             rm /usr/share/xivo-certs/server.{key,crt}
             echo -e "XXX\n100\nBackup and remove certificates... Done.\nXXX"
-            sleep 0.5
+            sleep 0.7
 
             echo -e "XXX\n50\nRegenerate self-signed certificate... \nXXX"
             dpkg-reconfigure xivo-certs
             echo -e "XXX\n100\nRegenerate self-signed certificate... Done.\nXXX"
-            sleep 0.5
+            sleep 0.7
 
             echo -e "XXX\n50\nRestart Wazo Services... \nXXX"
             xivo-update-config
-            wazo-service stop all
+            wazo-service start all
             echo -e "XXX\n50\nRestart Wazo Services... Done.\nXXX"
-            sleep 0.5
+            sleep 0.7
 
         } | whiptail --gauge "Wait Please" 6 60 0
 
